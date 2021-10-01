@@ -7,10 +7,10 @@ router.get('/', (req, res) => {
   // find all tags
   // be sure to include its associated Product data
   Tag.findAll({
-    include: {
-      model: Product,
-      attributes: ['product_name', 'price', 'stock', 'category_id']
-    }
+    include: [{
+      all: true,
+      nested: true,
+    }]
   })
   .then(dbTagData => res.json(dbTagData))
   .catch(err => {
@@ -27,10 +27,10 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: {
-      model: Product,
-      attributes: ['product_name', 'price', 'stock', 'category_id']
-    }
+    include: [{
+      all: true,
+      nested: true,
+    }]
   })
   .then(dbTagData =>res.json(dbTagData))
   .catch(err => {
